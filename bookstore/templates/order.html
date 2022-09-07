@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Order Logs{% endblock %}
+{% block content %}
+
+<!--order table -->
+    <div class="container">
+        {%for order in orders%}
+        <h2 class="text-center">Order ID: {{order['order_num']}}</h2>
+        <table class="table table-bordered" >
+            <thead>
+                <td scope="col">User Email</td>
+                <td scope="col">Book Title</td>
+                <td scope="col">Quantity</td>
+            </thead>
+            {% for item in order['order_items'] %}
+                <tr>
+                    <td>{{item['user_email']}}</td>
+                    <td>{{item['book_title']}}</td>
+                    <td>{{item['quantity']}}</td>
+
+                </tr>
+            {% endfor %}
+
+        </table>
+        {%endfor%}
+    </div>
+{% endblock %}

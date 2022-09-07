@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %} Cart {% endblock %}
+{%block content%}
+<div class="container">
+    {%for book in cart%}
+    <br>
+    <div class="card">
+        <div class="row no-gutters">
+          <div class="col-md-1">
+            <img src="{{ url_for('static', filename='book_images/' + book.image_file) }}" class="card-img" alt="...">
+          </div>
+          <div class="col-md-9">
+            <div class="card-body">
+              <h5 class="card-title">{{book.title}}</h5>
+              <p class="card-text">Quantity: {{book.quantity}}</p>
+              <p class="card-text">Price: ${{book.price}}</p>
+            </div>
+          </div>
+          <div class="col-md-2 cart-delete">
+            <a href="{{url_for('views.remove_cart_item', user_id=current_user.id, title=book.title)}}" class="card-link">
+              <button class="btn btn-danger"type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"aria-controls="offcanvasScrolling">
+                  Delete  
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    {%endfor%}
+</div>
+    <h4>Total Price: {{total_price}}</h4>
+    <a href="{{url_for('views.check_out')}}" class="card-link">
+      <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+        aria-controls="offcanvasScrolling">
+        Checkout
+      </button>
+    </a>
+{%endblock%}
+

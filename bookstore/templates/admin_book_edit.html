@@ -1,0 +1,51 @@
+{% extends "base.html" %}{% block title %}Admin Book Edit {% endblock %}
+{% block content %}
+
+
+<div class="container">  
+    <div class="row vh justify-content-center">
+        <div class="col-md-5">
+            <div class="row justify-content-center mb-6">
+                <h1>Editing Book: {{book.title}}</h1>
+                <img src="{{ url_for('static', filename='book_images/' + book.image_file) }}" class=" img-thumbnail" alt="...">
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="mb-6 form-group">
+                    <label for="image_file">Book Image</label>
+                    <input type="file" class="form-control-file" id="image_file" name="image_file">
+                </div>
+                <div class="mb-6 form-group">
+                    <label for="title" class="form-label">Book Title</label>
+                    <input type="text" class="form-control" name="title" id="title" value="{{book.title}}" required>
+                </div>
+                <div class="mb-6 form-group">
+                    <label for="author" class="form-label">Author</label>
+                    <input type="text" class="form-control" name="author" id="author" value="{{book.author}}" required>
+                </div>
+                <div class="mb-6 form-group">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea type="text-area" cols="30" rows="10" class="form-control" id="description" name="description" value="Book Decription" required>{{book.description}}</textarea>
+                </div>
+                <div class="mb-6 form-group">
+                    <label for="isbn" class="form-label">ISBN</label>
+                    <input type="text" class="form-control" name="isbn" id="isbn" value="{{book.isbn}}" required>
+                </div>
+                <div class="mb-6 form-group">
+                    <label for="price" class="form-label">Enter Price</label>
+                    <input type="text" class="form-control" name="price" id="price" value="{{book.price}}" required>
+                </div>
+                <div class="mb-6 form-group">
+                    <label for="category" class="form-label">Category</label>
+                    <input type="text" class="form-control" name="category" id="category" value="{{book.category}}" required>
+                </div>
+                <div class="mb-6 form-group">
+                    <label for="stock-quantity" class="form-label">Stock-Quantity</label>
+                    <input type="text" class="form-control" name="stock-quantity" id="stock-quantity" value="{{book.stock_quantity}}" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

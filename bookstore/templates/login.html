@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Log In{% endblock %}
+{% block content %}
+
+<!-- Add login form below here -->
+
+<div class="container">
+    <div class="row vh justify-content-center">
+        <div class="col-md-5">
+            <div class="row justify-content-center mb-6">
+                <br>
+            </div>
+            <form action="" id="signin" method="post">
+                <div class="mb-6 form-group">
+                    <label for="email" class="form-label"> Email Adress</label>
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailhelp">
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="form-label" > Password</label>
+                    <input type="password" class="form-control" name="password" id="password">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success w-100">Login</button>
+            </form>
+            <p class="mb-0 text-center">Not registered? <a href="/sign-up" class="text-decoration-none" id="sign">Register</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Add login form above here -->
+
+{% endblock %}

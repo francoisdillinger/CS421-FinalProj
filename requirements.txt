@@ -1,0 +1,11 @@
+# These are the required packages to run this project
+# As we use more packages this list will be updated
+Email_Validator
+Flask==2.0.3
+Flask_Login==0.6.2
+Flask_SQLAlchemy==2.5.1
+Flask_WTF==1.0.1
+setuptools==62.6.0
+Werkzeug==2.0.3
+WTForms==3.0.1
+Pillow==9.2.0

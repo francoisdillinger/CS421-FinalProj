@@ -1,0 +1,53 @@
+{% extends "base.html" %}{% block title %}Add Book{% endblock %}
+{% block content %}
+
+    <div class="container">  
+        <div class="row vh justify-content-center">
+            <div class="col-md-5">
+                <div class="row justify-content-center mb-6">
+                    <h1>Add New Book</h1>
+                </div>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="mb-6 form-group">
+                        <label for="image_file">Book Image</label>
+                        <input type="file" class="form-control-file" id="image_file" name="image_file">
+                    </div>
+                    <div class="mb-6 form-group">
+                        <label for="title" class="form-label">Book Title</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Enter Book Title" required>
+                    </div>
+                    <div class="mb-6 form-group">
+                        <label for="author" class="form-label">Author</label>
+                        <input type="text" class="form-control" name="author" id="author" placeholder="Enter Author" required>
+                    </div>
+                    <div class="mb-6 form-group">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea type="text-area" cols="30" rows="10" class="form-control" id="description" name="description" placeholder="Book Decription" required></textarea>
+                    </div>
+                    <div class="mb-6 form-group">
+                        <label for="isbn" class="form-label">ISBN</label>
+                        <input type="text" class="form-control" name="isbn" id="isbn" placeholder="Enter ISBN as 9 digits: i.e. 987654321" required>
+                    </div>
+                    <div class="mb-6 form-group">
+                        <label for="price" class="form-label">Enter Price</label>
+                        <input type="text" class="form-control" name="price" id="price" placeholder="Enter price as float: 5.95, 9.99, etc." required>
+                    </div>
+                    <div class="mb-6 form-group">
+                        <label for="category" class="form-label">Category</label>
+                        <input type="text" class="form-control" name="category" id="category" placeholder="Enter Category" required>
+                    </div>
+                    <div class="mb-6 form-group">
+                        <label for="stock-quantity" class="form-label">Stock-Quantity</label>
+                        <input type="text" class="form-control" name="stock-quantity" id="stock-quantity" placeholder="Enter Stock-Quantity" required>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}

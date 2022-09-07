@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block form %}
+<div class="category">
+  <form action="" method="POST">
+      <label class="text-secondary" for="cat_option">Choose a category:</label>
+      <select name="cat_option" id="cat_option">
+      <option value="All">All</option>
+      {%for category in categories%}
+          <option value="{{category}}">{{category}}</option>
+      {%endfor%}
+      </select>
+      <input class="btn btn-success" type="submit" value="Submit">
+  </form>
+</div>
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+  <!--drop down bar for category-->
+    {% for book in books %}
+        <div class="card m-2" style="width: 18rem;">
+            
+            <img src="{{ url_for('static', filename='book_images/' + book.image_file) }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title text-center">{{book.title}}</h5>
+                <p class="card-text">{{book.description}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Author: {{book.author}}</li>
+                <li class="list-group-item">Category: {{book.category}}</li>
+                <li class="list-group-item">ISBN: {{book.isbn}}</li>
+                <li class="list-group-item">Price: ${{book.price}}</li>
+                <li class="list-group-item">Number in stock: {{book.stock_quantity}}</li>
+            </ul>
+            <div class="card-body">
+              {% if current_user.admin_status %}
+              <a href="{{url_for('admin.admin_book_edit', isbn=book.isbn)}}" class="card-link"><button class="btn btn-primary"
+                  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                  aria-controls="offcanvasScrolling">Edit</button></a>
+              <a href="{{url_for('admin.admin_book_delete', isbn=book.isbn)}}" class="card-link"><button class="btn btn-danger"
+                  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                  aria-controls="offcanvasScrolling">Delete</button></a>
+              {% else %}
+              <a href="{{url_for('views.add_to_cart', isbn=book.isbn)}}" class="card-link"><button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Add to cart</button></a>
+              {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <p>Try scrolling the rest of the page to see this option in action.</p>
+  </div>
+</div> -->
+<br>
+<br>
+<br>
+
+{% endblock %}

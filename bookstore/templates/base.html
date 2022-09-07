@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}Home{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+        <link rel="stylesheet" href="../static/css/styles.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous" async defer></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+        <script src="" async defer></script>
+        
+        <!-- NAV BAR -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <div class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <a href="/" class="nav-item nav-link" id="home">Home</a>
+                        <a href="/logout" class="nav-item nav-link" id="logout">Logout</a>
+                        {% if user.admin_status %}
+                        <a href="/admin_book_add" class="nav-item nav-link" id="login">Add Book</a>
+
+                         <!--view all order-->
+                         <a href="/admin_view_order" class="nav-item nav-link" id="view_order">View Order</a>
+                         
+                        {% endif %}
+                    {% else %}
+                        <a href="/" class="nav-item nav-link" id="home">Home</a>
+                        <a href="/login" class="nav-item nav-link" id="login">Login</a>
+                        <a href="/sign-up" class="nav-item nav-link" id="signUp">Sign Up</a>
+                    {% endif %}
+                </div>
+                {% block form %}
+
+                {% endblock %}
+            </div>
+            {% if user.is_authenticated %}
+            <!-- Right elements -->
+            <div class="d-flex align-items-center me-4">
+                <!-- Icon -->
+                <a class="text-reset me-4" href="/cart">
+                    {% if current_user.cart_totals > 0 %}
+                        <span class="cart-basket d-flex align-items-center justify-content-center">{{ current_user.cart_totals }}</span>
+                    {% endif %}
+                    <i class="fas fa-shopping-cart text-secondary"></i>
+                </a>
+                <div class="dropdown nav-item">
+                    <a
+                    class="dropdown-toggle d-flex align-items-center hidden-arrow nav-link text-secondary"
+                    href="#"
+                    id="navbarDropdownMenuAvatar"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    >
+                        <img
+                            src="{{ url_for('static', filename='profile_images/' + current_user.image_file) }}"
+                            class="rounded-circle"
+                            height="25"
+                            alt="Image for profile picture"
+                            loading="lazy"
+                        />
+                        <strong class="d-none d-sm-block ms-1 nav-link text-secondary">{{ user.first_name }}</strong>
+                    </a>
+                    <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuAvatar"
+                    >
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('views.my_profile', id=current_user.id)}}">My profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>     
+            {% endif %}
+        </nav>
+
+        <!-- NOTIFICATIONS -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

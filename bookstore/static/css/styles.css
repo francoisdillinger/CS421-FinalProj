@@ -1,0 +1,30 @@
+.container-fluid{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+span.cart-basket {
+    font-size: .7rem;
+    position: absolute;
+    top: 15px;
+    right: 206px;
+    width: 15px;
+    height: 16px;
+    color: #fff;
+    background-color: #418deb;
+    border-radius: 50%;
+  }
+
+  .cart-delete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  img.img-thumbnail{
+    max-width: 50%;
+  }
+  div.category{
+    margin: auto;
+  }
